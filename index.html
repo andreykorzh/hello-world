@@ -1,0 +1,173 @@
+
+  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Расчет стоимости технологического присоединения</title>
+
+    <!-- <style> -->
+      <!-- body { -->
+<!-- background: linear-gradient(65deg, #1ac4db,#00c495,#8ccc14); -->
+
+		<!-- width: 500px; -->
+  <!-- height: 14000px; -->
+  <!-- margin: 0 auto; -->
+      <!-- } -->
+
+      <!-- p { -->
+        <!-- background: aqua; -->
+        <!-- border: 3px solid blue; -->
+        <!-- padding: 10px; -->
+        <!-- margin: 10px; -->
+      <!-- } -->
+
+      <!-- span { -->
+        <!-- background: red; -->
+        <!-- border: 1px solid black; -->
+      <!-- } -->
+<!-- h1[class="first_p"] -->
+ <!-- { -->
+  <!-- position: fixed; -->
+  <!-- top: 0; -->
+  <!-- width: 500px; -->
+  <!-- margin-top: 0; -->
+  <!-- background: white; -->
+  <!-- padding: 10px; -->
+<!-- } -->
+<!-- h1[class="second_p"] -->
+<!-- { -->
+  <!-- position: sticky; -->
+  <!-- top: 0; -->
+  <!-- width: 500px; -->
+  <!-- margin-top: 0; -->
+  <!-- background: linear-gradient(90deg, #f7c316,#ff916c,#f882b0); -->
+  <!-- padding: 10px; -->
+<!-- } -->
+<style>
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+input [type="number"]
+{
+
+}
+nav
+{
+background: blue;
+top: 0;
+height: 100px;
+position: sticky;
+}
+#navbar li
+{
+ display: inline;
+ background: red;
+ marker: none;
+ border: 2px solid;
+}
+</style>
+ 
+  </head>
+  <body>
+  <nav id="navbar">
+  <ul>
+	<li><a href="#">Потребителям</a></li>
+	<li>Раскрытие информации</li>
+	<li>О предприятии</li>
+	<li>Контакты</li>
+  </ul>
+  </nav>
+   <h1>КАЛЬКУЛЯТОР РАСЧЕТА СТОИМОСТИ ТЕХНОЛОГИЧЕСКОГО ПРИСОЕДИНЕНИЯ</h1>
+
+   <h3>Максимальная мощность, кВт:</h3>
+   
+   <input type="number" min=1 max=5000 id="power" name="power" value="15">
+
+   <h3>Категория надежности:</h3>
+   <label>3<input type="radio" name="category" id="cat1" checked></label> 
+   <br> 
+   <label>2, 1<input type="radio" name="category" id="cat2"></label>
+   
+  
+   <h3>Необходимость строительства линий электропередач:</h3>
+   Да<input type="radio" name="build" id="build1">
+   Нет<input type="radio" name="build" id="build2" checked>
+   <div id="type_line" hidden>
+      <h3>Вид линии электропередач:</h3>
+   Кабельная линия<input type="radio" name="build1" id="build3" checked>
+   Воздушная линия<input type="radio" name="build1" id="build4" >
+   <h3>Напряжение линии:</h3>
+<select name="voltage">
+    <option selected value="s1">0,4 кВ</option>
+    <option value="s2">10 кВ</option>
+   </select>
+   <h3>Способ прокладки линии электропередач:</h3>
+   <select name="cable" id="cable">
+    <option selected value="s1">1</option>
+    <option value="s2">2</option>
+	<option value="s3">3</option>
+	<option value="s4">4</option>
+	<option value="s5">5</option>
+   </select>
+    <select name="air" id="air" hidden>
+    <option selected value="s1">1111</option>
+    <option value="s2">222222</option>
+   </select>
+   <h3>Длина линии, м:</h3>
+   <input type="number" min=1 max=5000 id="length" name="length" value="1">
+   </div>
+   <h3>Необходимость строительства источника питания</h3>
+   Да<input type="radio" name="build_power" id="build5">
+   Нет<input type="radio" name="build_power" id="build6" checked>
+</form>
+   
+  </body>
+  
+  <script>
+ let div = document.createElement('div');
+  div.className = "alert";
+  document.body.append(div);
+    //let elements = document.querySelectorAll('input,select');
+	//div.innerHTML = document.getElementById ("power").value*1000;
+	let cost = Number (document.getElementById ("power").value*1000);
+  document.getElementById ("power").onchange=function()
+  {
+  cost = document.getElementById ("power").value*1000;
+      div.innerHTML = cost;
+  }
+document.getElementById ("cat2").onchange=function()//выбрана 2 или 1 категория
+  {
+      div.innerHTML = cost*2;
+  }
+document.getElementById ("cat1").onchange=function() //выбрана 3 категория
+  {
+      div.innerHTML = div.innerHTML/2;
+  } 
+document.getElementById ("build1").onchange = function () //Нужно строить линию
+{
+ document.getElementById ("type_line").hidden = false; //отображение скрытого по умолчанию меню - параметры линии
+}
+ document.getElementById ("build2").onchange = function ()
+{
+ document.getElementById ("type_line").hidden = true;//скрытие меню - параметры линии
+}
+ document.getElementById ("build3").onchange = function () //выбрана кабельная линия
+{
+ document.getElementById ("air").hidden = true; //скрытие меню параметров воздушной линии
+ document.getElementById ("cable").hidden = false; //отображение меню параметров кабельной линии
+ 
+}
+ document.getElementById ("build4").onchange = function () //выбрана воздушная линия
+{
+ document.getElementById ("air").hidden = false; //отображение меню параметров воздушной линии
+ document.getElementById ("cable").hidden = true;//скрытие меню параметров кабельной линии
+}
+
+  </script>
+</html>
+
